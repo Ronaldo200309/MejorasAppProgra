@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "708677742339",
+    "project_id": "clase7app",
+    "storage_bucket": "clase7app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:708677742339:android:2aa6e4ca420878717b4336",
+        "android_client_info": {
+          "package_name": "com.example.clase7"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDk1b9zfMCXjnbjfT6hxJLv-pFALTC7YOE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

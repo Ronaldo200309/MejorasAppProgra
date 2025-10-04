@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Clase</string>
+    <string name="login_screen_text">Iniciar sesión</string>
+    <string name="login_screen_login_button">Iniciar sesión</string>
+    <string name="placeholder_text"> "" </string>
+    <string name="login_screen_register_button">No tienes cuenta ? crea una acá</string>
+
+    <string name="register_screen_text">Crea tu cuenta</string>
+    <string name="register_screen_register_button">Crear cuenta</string>
+    <string name="register_screen_success">Registro Exitoso</string>
+    <string name="register_screen_password_error">Las contraseñas no coinciden</string>
+
+    <string name="fields_email">Correo electrónico</string>
+    <string name="fields_password">Contraseña</string>
+    <string name="fields_confirm_password">Confirmar contraseña</string>
+
+    <string name="login_screen_success">Inicio de sesion correcto</string>
+    <string name="login_screen_fail">Fallo el inicio de sesion</string>
+    <string name="login_screen_to_users">Ir a usuarios</string>
+
+    <string name="user_screen_new_user">Nuevo usuario</string>
+    <string name="user_screen_tittle">Usuarios</string>
+
+    <string name="user_form_screen_save">Guardar</string>
+
+    <string name="screen_login">login</string>
+    <string name="screen_register">register</string>
+    <string name="screen_log_success">logSuccess</string>
+    <string name="screen_users">users</string>
+    <string name="screen_users_form">users_form</string>
+
+    <string name="login_screen_validation_email_empty">El email es requerido</string>
+    <string name="login_screen_validation_email_invalid">El email es invalido</string>
+    <string name="login_screen_validation_password_empty">El password es requerido</string>
+    <string name="login_screen_validation_password_invalid">El password debe tener al menos 6 caracteres</string>
+
+    <string name="user_form_screen_email">Email</string>
+
+    <string name="content_description_icon_exit">Icon register</string>
+    <string name="content_description_icon_person">User icon</string>
+    <string name="content_description_icon_email">Email icon</string>
+    <string name="content_description_icon_password">Password icon</string>
+    <string name="content_description_icon_confirm_password">Confirm password icon</string>
+    <string name="content_description_icon_add">Add icon</string>
+
+</resources>
