@@ -33,7 +33,7 @@ fun InformesScreen(navController: NavController) {
     val scope = rememberCoroutineScope()
     val activity = LocalView.current.context as Activity
 
-    // Estados para el formulario
+
     var curso by remember { mutableStateOf("") }
     var año by remember { mutableStateOf("") }
     var semestre by remember { mutableStateOf("") }
@@ -47,7 +47,7 @@ fun InformesScreen(navController: NavController) {
             TopAppBar(
                 title = {
                     Text(
-                        "Nuevo Informe",
+                        "Informe Nuevo",
                         fontWeight = FontWeight.Bold
                     )
                 },
@@ -55,7 +55,7 @@ fun InformesScreen(navController: NavController) {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Volver"
+                            contentDescription = "Regresar"
                         )
                     }
                 }
@@ -71,7 +71,7 @@ fun InformesScreen(navController: NavController) {
         ) {
             // Título
             Text(
-                text = "Crear Informe Académico",
+                text = "Crear Nuevo Informe Académico",
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color(0xFF0066B3),
@@ -83,7 +83,7 @@ fun InformesScreen(navController: NavController) {
                 Text(
                     text = message,
                     color = when {
-                        message.contains("éxito") -> Color.Green
+                        message.contains("Muy bien") -> Color.Green
                         message.contains("Error") -> Color.Red
                         else -> Color.Black
                     },
@@ -126,7 +126,7 @@ fun InformesScreen(navController: NavController) {
                     },
                     modifier = Modifier.fillMaxWidth(),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                    placeholder = { Text("Ej: 2024") }
+                    placeholder = { Text("Ej: 2025") }
                 )
 
                 // Campo Semestre
@@ -174,7 +174,7 @@ fun InformesScreen(navController: NavController) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(120.dp),
-                    placeholder = { Text("Comentarios adicionales...") },
+                    placeholder = { Text("Comentarios extras...") },
                     singleLine = false
                 )
 
@@ -203,14 +203,14 @@ fun InformesScreen(navController: NavController) {
                         ) {
                             Icon(
                                 imageVector = Icons.Filled.Add,  // Ícono simple que existe
-                                contentDescription = "Adjuntar archivo"
+                                contentDescription = "Adjuntar archivos"
                             )
                             Spacer(modifier = Modifier.width(8.dp))
-                            Text("Seleccionar Archivos")
+                            Text("Selecciona Archivos")
                         }
 
                         Text(
-                            text = "Puedes adjuntar documentos, imágenes, etc.",
+                            text = "Puedes adjuntar documentos como: imágenes,pdf, etc.",
                             fontSize = 12.sp,
                             color = Color.Gray,
                             modifier = Modifier.padding(top = 8.dp)
