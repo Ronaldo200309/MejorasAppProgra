@@ -77,7 +77,7 @@ fun SuccessScreen(navController: NavController){
                 modifier = Modifier.padding(vertical = 20.dp)
             )
 
-            // Botón para Ir a Usuarios
+
             Button(
                 onClick = {
                     navController.navigate(context.getString(R.string.screen_users))
@@ -90,7 +90,7 @@ fun SuccessScreen(navController: NavController){
                 Text(stringResource(R.string.login_screen_to_users))
             }
 
-            // Botón para Crear Informe
+
             Button(
                 onClick = {
                     navController.navigate("informes_screen")
@@ -103,7 +103,7 @@ fun SuccessScreen(navController: NavController){
                 Text(" Crear Informe")
             }
 
-            // Botón para Cerrar Sesión
+
             Button(
                 onClick = {
                     auth.signOut()

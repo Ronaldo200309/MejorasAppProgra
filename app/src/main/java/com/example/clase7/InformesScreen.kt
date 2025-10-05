@@ -29,7 +29,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun InformesScreen(navController: NavController) {
     val context = LocalContext.current
-    val db = FirebaseFirestore.getInstance()  // SIN ktx
+    val db = FirebaseFirestore.getInstance()
     val scope = rememberCoroutineScope()
     val activity = LocalView.current.context as Activity
 
@@ -47,7 +47,7 @@ fun InformesScreen(navController: NavController) {
             TopAppBar(
                 title = {
                     Text(
-                        "Informe Nuevo",
+                        "Nuevo Informe",
                         fontWeight = FontWeight.Bold
                     )
                 },
@@ -69,21 +69,21 @@ fun InformesScreen(navController: NavController) {
                 .fillMaxSize(),
             verticalArrangement = Arrangement.Top
         ) {
-            // Título
+
             Text(
-                text = "Crear Nuevo Informe Académico",
+                text = "Ingresar un Nuevo Informe Académico",
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color(0xFF0066B3),
                 modifier = Modifier.padding(bottom = 20.dp)
             )
 
-            // Mensaje de estado
+
             if (message.isNotEmpty()) {
                 Text(
                     text = message,
                     color = when {
-                        message.contains("Muy bien") -> Color.Green
+                        message.contains("Excelente") -> Color.Green
                         message.contains("Error") -> Color.Red
                         else -> Color.Black
                     },
@@ -91,21 +91,21 @@ fun InformesScreen(navController: NavController) {
                 )
             }
 
-            // Formulario
+
             Column(
                 modifier = Modifier
                     .weight(1f)
                     .verticalScroll(rememberScrollState()),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                // Campo Curso
+
                 OutlinedTextField(
                     value = curso,
                     onValueChange = { curso = it },
                     label = { Text("Curso *") },
                     leadingIcon = {
                         Icon(
-                            imageVector = Icons.Filled.Create,  // Ícono simple que existe
+                            imageVector = Icons.Filled.Create,
                             contentDescription = "Curso"
                         )
                     },
@@ -113,14 +113,14 @@ fun InformesScreen(navController: NavController) {
                     placeholder = { Text("Ej: Matemáticas Básicas") }
                 )
 
-                // Campo Año
+
                 OutlinedTextField(
                     value = año,
                     onValueChange = { año = it },
                     label = { Text("Año *") },
                     leadingIcon = {
                         Icon(
-                            imageVector = Icons.Filled.Create,  // Ícono simple que existe
+                            imageVector = Icons.Filled.Create,
                             contentDescription = "Año"
                         )
                     },
@@ -129,14 +129,14 @@ fun InformesScreen(navController: NavController) {
                     placeholder = { Text("Ej: 2025") }
                 )
 
-                // Campo Semestre
+
                 OutlinedTextField(
                     value = semestre,
                     onValueChange = { semestre = it },
                     label = { Text("Semestre *") },
                     leadingIcon = {
                         Icon(
-                            imageVector = Icons.Filled.Create,  // Ícono simple que existe
+                            imageVector = Icons.Filled.Create,
                             contentDescription = "Semestre"
                         )
                     },
@@ -145,14 +145,14 @@ fun InformesScreen(navController: NavController) {
                     placeholder = { Text("Ej: 1 o 2") }
                 )
 
-                // Campo Fecha
+
                 OutlinedTextField(
                     value = fecha,
                     onValueChange = { fecha = it },
                     label = { Text("Fecha") },
                     leadingIcon = {
                         Icon(
-                            imageVector = Icons.Filled.Create,  // Ícono simple que existe
+                            imageVector = Icons.Filled.Create,
                             contentDescription = "Fecha"
                         )
                     },
@@ -160,25 +160,25 @@ fun InformesScreen(navController: NavController) {
                     placeholder = { Text("DD/MM/AAAA") }
                 )
 
-                // Campo Comentarios
+
                 OutlinedTextField(
                     value = comentarios,
                     onValueChange = { comentarios = it },
                     label = { Text("Comentarios") },
                     leadingIcon = {
                         Icon(
-                            imageVector = Icons.Filled.Create,  // Ícono simple que existe
+                            imageVector = Icons.Filled.Create,
                             contentDescription = "Comentarios"
                         )
                     },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(120.dp),
-                    placeholder = { Text("Comentarios extras...") },
+                    placeholder = { Text("Comentarios adicionales...") },
                     singleLine = false
                 )
 
-                // Sección Archivos Adjuntos
+
                 Card(
                     modifier = Modifier.fillMaxWidth(),
                     colors = CardDefaults.cardColors(containerColor = Color(0xFFF5F5F5))
@@ -202,15 +202,15 @@ fun InformesScreen(navController: NavController) {
                             modifier = Modifier.fillMaxWidth()
                         ) {
                             Icon(
-                                imageVector = Icons.Filled.Add,  // Ícono simple que existe
+                                imageVector = Icons.Filled.Add,
                                 contentDescription = "Adjuntar archivos"
                             )
                             Spacer(modifier = Modifier.width(8.dp))
-                            Text("Selecciona Archivos")
+                            Text("Selecciona Archivo")
                         }
 
                         Text(
-                            text = "Puedes adjuntar documentos como: imágenes,pdf, etc.",
+                            text = "ingresa documentos, fotos, etc.",
                             fontSize = 12.sp,
                             color = Color.Gray,
                             modifier = Modifier.padding(top = 8.dp)
@@ -219,17 +219,17 @@ fun InformesScreen(navController: NavController) {
                 }
             }
 
-            // Botón Guardar
+
             Button(
                 onClick = {
-                    // Validaciones
+
                     if (curso.isEmpty() || año.isEmpty() || semestre.isEmpty()) {
                         message = "Error: Los campos con * son obligatorios"
                         return@Button
                     }
 
                     isLoading = true
-                    message = "Guardando informe..."
+                    message = "Guardando tu informe..."
 
                     scope.launch {
                         try {
@@ -242,10 +242,10 @@ fun InformesScreen(navController: NavController) {
                                 db = db,
                                 onSuccess = {
                                     isLoading = false
-                                    message = " Informe guardado exitosamente!"
+                                    message = " Informe guardado exitosamente, ten buen día!"
                                     Toast.makeText(context, "Informe guardado", Toast.LENGTH_SHORT).show()
 
-                                    // Limpiar formulario después de guardar
+
                                     curso = ""
                                     año = ""
                                     semestre = ""
@@ -284,7 +284,7 @@ fun InformesScreen(navController: NavController) {
     }
 }
 
-// Función para guardar el informe en Firestore
+
 private fun guardarInforme(
     curso: String,
     año: String,
@@ -301,7 +301,7 @@ private fun guardarInforme(
         "semestre" to semestre,
         "fecha" to fecha,
         "comentarios" to comentarios,
-        "archivos" to listOf<String>(), // Por ahora vacío
+        "archivos" to listOf<String>(),
         "fechaCreacion" to Timestamp.now(),
         "estado" to "pendiente"
     )
@@ -312,6 +312,6 @@ private fun guardarInforme(
             onSuccess()
         }
         .addOnFailureListener { e ->
-            onError(e.message ?: "Error desconocido")
+            onError(e.message ?: "Error ")
         }
 }

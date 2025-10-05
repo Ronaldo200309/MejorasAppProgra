@@ -54,8 +54,8 @@ import kotlinx.coroutines.tasks.await
 @Composable
 fun RegisterScreen(navController: NavController){
     val context = LocalContext.current
-    val auth = FirebaseAuth.getInstance()  // CAMBIADO
-    val db = FirebaseFirestore.getInstance()  // CAMBIADO
+    val auth = FirebaseAuth.getInstance()
+    val db = FirebaseFirestore.getInstance()
     val scope = rememberCoroutineScope()
 
     var stateEmail by remember {mutableStateOf("")}
@@ -101,13 +101,13 @@ fun RegisterScreen(navController: NavController){
                 color = Color(0xFF0066B3)
             )
 
-            // Mensaje de estado
+
             if (message.isNotEmpty()) {
                 Spacer(modifier = Modifier.height(10.dp))
                 Text(
                     text = message,
                     color = when {
-                        message.contains("éxito") -> Color.Green
+                        message.contains("Exito") -> Color.Green
                         message.contains("Error") || message.contains("permisos") -> Color.Red
                         else -> Color.Black
                     }
@@ -168,51 +168,51 @@ fun RegisterScreen(navController: NavController){
 
             Button(
                 onClick = {
-                    // Resetear mensaje
+
                     message = ""
 
-                    // Validaciones básicas
+
                     if (statePassword != stateConfirmPassword) {
                         Toast.makeText(activity, context.getString(R.string.register_screen_password_error), Toast.LENGTH_SHORT).show()
                         return@Button
                     }
 
                     if (statePassword.length < 6) {
-                        Toast.makeText(activity, "La contraseña debe tener al menos 6 caracteres", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity, "La contraseña debe tener al menos 6 caracteres por favor", Toast.LENGTH_SHORT).show()
                         return@Button
                     }
 
                     if (stateEmail.isEmpty()) {
-                        Toast.makeText(activity, "El email es requerido", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity, "El email es obligatorio", Toast.LENGTH_SHORT).show()
                         return@Button
                     }
 
                     isLoading = true
                     message = "Validando permisos..."
 
-                    // Usar coroutines para la validación
+
                     scope.launch {
                         try {
-                            // PRIMERO: Validar si el usuario está en la lista permitida
+
                             val usuarioPermitido = validarUsuarioPermitido(stateEmail, db)
 
                             if (!usuarioPermitido) {
-                                message = "Error: No tienes permisos para registrarte. Contacta al administrador."
+                                message = "No tienes permisos para registrarte. Contacta al administrador."
                                 isLoading = false
                                 return@launch
                             }
 
-                            // SEGUNDO: Si está permitido, crear el usuario
+
                             message = "Usuario autorizado. Creando cuenta..."
 
                             auth.createUserWithEmailAndPassword(stateEmail, statePassword)
                                 .addOnCompleteListener(activity) { task ->
                                     isLoading = false
                                     if (task.isSuccessful) {
-                                        message = "Registro exitoso!"
+                                        message = "Registro con exito!"
                                         Toast.makeText(activity, context.getString(R.string.register_screen_success), Toast.LENGTH_SHORT).show()
 
-                                        // Navegar a otra pantalla después del registro exitoso
+
                                         navController.popBackStack()
                                     } else {
                                         message = "Error: ${task.exception?.message}"
@@ -251,19 +251,19 @@ fun RegisterScreen(navController: NavController){
     }
 }
 
-// FUNCIÓN NUEVA: Validar si el usuario está en la lista permitida
+
 private suspend fun validarUsuarioPermitido(email: String, db: FirebaseFirestore): Boolean {
     return try {
-        // Buscar en la colección 'usuarios_permitidos' donde el email coincida
+
         val query = db.collection("usuarios_permitidos")
             .whereEqualTo("email", email.toLowerCase())
             .get()
             .await()
 
-        // Si encontramos al menos un documento, el usuario está permitido
+
         !query.isEmpty && query.documents.isNotEmpty()
     } catch (e: Exception) {
-        // Si hay error, asumimos que no está permitido
+
         println("Error validando usuario: ${e.message}")
         false
     }
